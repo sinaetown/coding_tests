@@ -4,15 +4,6 @@ import java.util.*;
 class Solution {
     public int solution(String s) {
         int answer = 0;
-        Pattern p = Pattern.compile("\\d+");
-        Pattern findZ = Pattern.compile("\\Z");
-        Matcher pMatcher = p.matcher(s);
-        Matcher zMatcher = findZ.matcher(s);
-        
-//         while(pMatcher.find()){
-//             System.out.print(zMat.group());
-//         }
-        
         int sum = 0;
         String[] splitted = new String[s.length()];
         int minus = 0;
