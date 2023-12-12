@@ -1,2 +1,2 @@
-# java_intro
-This is a auto push repository for Baekjoon Online Judge created with [BaekjoonHub](https://github.com/BaekjoonHub/BaekjoonHub).
+# coding_tests
+This is a repo for coding test problems that I solved @ Programmers and BaekJoon.
