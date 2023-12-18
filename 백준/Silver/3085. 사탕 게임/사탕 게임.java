@@ -38,35 +38,26 @@ public class Main {
                             temp = matrix[i][j];
                             matrix[i][j] = matrix[x][y];
                             matrix[x][y] = temp;
-//                            System.out.println(Arrays.toString(matrix[i]));
-//                            System.out.println("r: " +rowCnt(matrix));
-//                            System.out.println("c: "+colCnt(matrix));
-//                            maxList.add(Math.max(rowCnt(matrix), colCnt(matrix)));
                             rMaxList.add(rowCnt(matrix));
                             cMaxList.add(colCnt(matrix));
-//                            rMax = rowCnt(matrix);
-//                            cMax = colCnt(matrix);
                             temp2 = matrix[i][j];
                             matrix[i][j] = matrix[x][y];
                             matrix[x][y] = temp2;
                         }
-//                        System.out.println();
                     }
                 }
             }
         }
         cMaxList.sort(Comparator.reverseOrder());
         rMaxList.sort(Comparator.reverseOrder());
-//        System.out.println(cMaxList);
-//        System.out.println(rMaxList);
-        System.out.println(Math.max(cMaxList.get(0),rMaxList.get(0)));
+        System.out.println(Math.max(cMaxList.get(0), rMaxList.get(0)));
 
     }
 
     public static int rowCnt(String[][] matrix) {
         rowCntList = new ArrayList<>();
         int max = 0;
-        int count=0;
+        int count = 0;
         for (int i = 0; i < n; i++) {
             count = 1;
             for (int j = 0; j < n - 1; j++) {
@@ -75,47 +66,28 @@ public class Main {
 
                 } else {
                     count = 1;
-//                    rowCntList.add(count);
-//                    count = 1;
                 }
                 max = Math.max(count, max);
             }
         }
-//            System.out.println("MAX: "+max+"Count: "+count);
-//            real_max= Math.max(max, count);
-//            System.out.println("REALMax: "+real_max);
-//            max =;
-//            System.out.println("here:"+max);
-//            System.out.println(count);
-//            rowCntList.add(count);
-//            rowCntList.sort(Comparator.reverseOrder());
-
         return Math.max(max, count);
     }
 
     public static int colCnt(String[][] matrix) {
         colCntList = new ArrayList<>();
         int max = 0;
-        int count=0;
+        int count = 0;
         for (int i = 0; i < n; i++) {
             count = 1;
             for (int j = 0; j < n - 1; j++) {
                 if (matrix[j][i].equals(matrix[j + 1][i])) {
                     count++;
                 } else {
-//                    System.out.println(count);
-//                    colCntList.add(count);
-//                    count = 1;
-
                     count = 1;
                 }
                 max = Math.max(count, max);
             }
-//            System.out.println(max);
-//            colCntList.add(count);
-//            colCntList.sort(Comparator.reverseOrder());
         }
-//        System.out.println("list: "+colCntList);
         return Math.max(max, count);
     }
 }
