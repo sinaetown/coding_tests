@@ -1,19 +1,24 @@
+import java.util.*;
 class Solution {
+    static int answer = 0;
+    static int count = 0;
     public int solution(int balls, int share) {
-        int answer = 0;
-        int[][] matrix = new int[balls+1][balls+1];
-        for(int i = 0; i < balls+1; i++){
-            matrix[i][i] = 1;
-            matrix[i][1] = i;
-            matrix[i][0] = 1;
+       
+        
+         ballsRecur(balls, share, 0);
+        
+        return answer;
+    }
+    
+     static void ballsRecur(int balls, int share, int start) {
+        if (count == share) {
+            answer++;
+            return;
         }
-
-        for(int i = 2; i <= balls; i++){
-            for(int j = 1; j < i; j++){
-                matrix[i][j] = matrix[i-1][j] + matrix[i-1][j-1];
-            }
+        for (int i = start; i < balls; i++) {
+            count += 1;
+            ballsRecur(balls, share, i + 1);
+            count -= 1;
         }
-        answer = matrix[balls][share];
-        return answer; 
     }
 }
