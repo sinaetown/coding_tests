@@ -40,7 +40,6 @@ public class Main {
                             deq.removeFirst();
                         } else {
                             bw.write("error" + "\n");
-//                            answer.add("error");
                             err = true;
                             break;
                         }
@@ -48,7 +47,6 @@ public class Main {
                         if (!deq.isEmpty()) {
                             deq.removeLast();
                         } else {
-//                            answer.add("error");
                             bw.write("error" + "\n");
                             err = true;
                             break;
@@ -68,7 +66,6 @@ public class Main {
                 }
             }
             StringBuilder part = new StringBuilder();
-//            System.out.println(arrRes.size());
             if (!err) {
                 part.append("[");
                 for (int ar : arrRes) {
@@ -77,16 +74,11 @@ public class Main {
                 }
                 if (arrRes.size() != 0) {
                     part.deleteCharAt(part.length()-1);
-//                    part = part.substring(0, part.length() - 1);
                 }
                 part.append("]");
-//                answer.add(part);
                 bw.write(String.valueOf(part)+"\n");
             }
         }
-//        for (String ans : answer) {
-//            System.out.println(ans);
-//        }
         bw.flush();
     }
 }
