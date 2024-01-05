@@ -25,7 +25,6 @@ class Main {
             StringTokenizer st = new StringTokenizer(br.readLine());
             for (int b = 0; b < 5; b++) {
                 calledOut.add(Integer.parseInt(st.nextToken()));
-//                chk(Integer.parseInt(st.nextToken()));
             }
         }
         for (int i : calledOut) {
@@ -40,22 +39,14 @@ class Main {
         for (int i = 0; i < matrix.length; i++) {
             for (int j = 0; j < matrix[i].length; j++) {
                 if (called == matrix[i][j]) {
-//                    System.out.println(i + " " + j);
                     horMap.put(i, horMap.getOrDefault(i, 0) + 1);
-//                    System.out.println("Horizontal Map :::: " + horMap);
                     verMap.put(j, verMap.getOrDefault(j, 0) + 1);
-//                    System.out.println("Vertical Map :::: " + verMap);
-
                     if (i == j) {
                         left++;
                         chkDiagonal();
-//                        System.out.println(left);
                     }
                     if ((i == 0 && j == 4) || (i == 1 && j == 3) || (i == 2 && j == 2) || (i == 3 & j == 1) || (i == 4 && j == 0)) {
-
                         right++;
-//                        System.out.println("right: " + right);
-//                        System.out.println("diagnoalRight: " + i + " " + j);
                         chkDiagonal();
                     }
                     chkVertical();
@@ -68,12 +59,10 @@ class Main {
                         check = true;
                         return;
                     }
-//                    chkDiagonal();
                     if (bingo >= 3) {
                         check = true;
                         return;
                     }
-//                    System.out.println("BINGO: " + bingo);
                 }
             }
         }
@@ -82,7 +71,6 @@ class Main {
     static void chkVertical() {
         for (Map.Entry<Integer, Integer> e : verMap.entrySet()) {
             if (e.getValue() == 5 && !verChk.contains(e.getKey())) {
-//                System.out.println("Ver: " + e.getKey());
                 verChk.add(e.getKey());
                 bingo++;
             }
@@ -92,7 +80,6 @@ class Main {
     static void chkHorizontal() {
         for (Map.Entry<Integer, Integer> e : horMap.entrySet()) {
             if (e.getValue() == 5 && !horChk.contains(e.getKey())) {
-//                System.out.println("Hor: " + e.getKey());
                 horChk.add(e.getKey());
                 bingo++;
             }
@@ -102,12 +89,10 @@ class Main {
     static void chkDiagonal() {
         if (left == 5 && !l) {
             bingo++;
-//            System.out.println("left done");
             l = true;
         }
         if (right == 5 && !r) {
             bingo++;
-//            System.out.println("right done");
             r = true;
         }
     }
