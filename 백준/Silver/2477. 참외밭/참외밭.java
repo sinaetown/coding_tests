@@ -19,24 +19,11 @@ class Main {
 //        System.out.println(typeMap); //기본 'ㄱ'자
         if (typeMap.get(1) == 2 && typeMap.get(4) == 2) {
             changeTypeTwo();
-//            System.out.println("two");
-//            for (int[] c : coordinates) {
-//                System.out.println(Arrays.toString(c));
-//            }
 
         } else if (typeMap.get(2) == 2 && typeMap.get(4) == 2) {
             changeTypeThree();
-//            System.out.println("three");
-//            for (int[] c : coordinates) {
-//                System.out.println(Arrays.toString(c));
-//            }
-
         } else if (typeMap.get(2) == 2 && typeMap.get(3) == 2) {
             changeTypeFour();
-//            System.out.println("four");
-//            for (int[] c : coordinates) {
-//                System.out.println(Arrays.toString(c));
-//            }
         }
         int m = 0;
         int n = 0;
@@ -104,5 +91,4 @@ class Main {
             }
         }
     }
-
 }
