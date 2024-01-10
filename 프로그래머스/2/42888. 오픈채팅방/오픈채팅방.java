@@ -9,15 +9,13 @@ class Solution {
             StringTokenizer st = new StringTokenizer(r);
             String cmd = st.nextToken();
             if (cmd.equals("Enter") || cmd.equals("Change")) {
-                String uID = st.nextToken();
-                String nickname = st.nextToken();
-                map.put(uID, nickname); //마지막 닉네임 세팅
+                map.put(st.nextToken(), st.nextToken()); //마지막 닉네임 세팅
             }
-            if (cmd.equals("Enter") || cmd.equals("Leave")) {
+            if (cmd.equals("Change")) {
                 count++;
             }
         }
-        answer = new String[count];
+        answer = new String[record.length-count];
         for (String r : record) {
             StringTokenizer st = new StringTokenizer(r);
             String cmd = st.nextToken();
