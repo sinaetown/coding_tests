@@ -2,43 +2,41 @@ import java.util.*;
 
 public class Main {
     static List<Integer> given;
-    static int five;
-
     static int sum;
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         StringTokenizer st = new StringTokenizer(sc.nextLine());
+
+//        정답 집어넣기!
         given = new ArrayList<>();
-        List<List<Integer>> all = new ArrayList<>();
         for (int i = 0; i < 10; i++) given.add(Integer.parseInt(st.nextToken()));
+
+//      영재가 찍은 답 집어넣을 리스트!
         List<Integer> sub = new ArrayList<>();
-        five = 0;
-        dfs(all, sub, 0, 1);
+        dfs(sub, 0, 0);
         System.out.println(sum);
     }
 
-    static void dfs(List<List<Integer>> all, List<Integer> sub, int count, int start) {
-        five=0;
+    static void dfs(List<Integer> sub, int count, int five) {
         if (sub.size() >= 3 && ((sub.get(count - 3) == sub.get(count - 2)) &&
-                (sub.get(count - 2) == sub.get(count - 1)))) {
+                (sub.get(count - 2) == sub.get(count - 1)))) { //3개 연속 똑같은 값이 나올 경우 멈춰!
             return;
         }
-        if (sub.size() == 10) {
+        if (sub.size() == 10) { //3번 연속으로 같은 숫자가 없이 순열이 만들어졌을 경우, 답이랑 비교하기!
             for (int s = 0; s < sub.size(); s++) {
                 if (sub.get(s) == given.get(s)) {
                     five++;
                 }
             }
-            if(five>=5){
+            if (five >= 5) { //5점 이상일 경우
                 sum++;
             }
-//            all.add(new ArrayList<>(sub));
         } else {
             for (int j = 1; j <= 5; j++) {
                 sub.add(j);
-                count++;
-                dfs(all, sub, count, 1);
+                count++; //count의 역할은 어디까지 순열이 만들어진 마지막 부분을 가리키는 pointer!
+                dfs(sub, count, 0);
                 count--;
                 sub.remove(sub.size() - 1);
             }
