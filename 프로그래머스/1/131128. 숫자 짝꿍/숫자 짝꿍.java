@@ -2,7 +2,6 @@ import java.util.*;
 
 class Solution {
     public String solution(String X, String Y) {
-        String answer = "";
         Map<Character, Integer> xMap = new HashMap<>();
         Map<Character, Integer> yMap = new HashMap<>();
         List<Character> common = new ArrayList<>();
