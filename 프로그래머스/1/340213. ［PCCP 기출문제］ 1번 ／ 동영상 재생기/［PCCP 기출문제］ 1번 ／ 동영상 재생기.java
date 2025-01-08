@@ -12,7 +12,6 @@ class Solution {
             } else if (commands[c].equals("prev")) {
                 posSeconds -= 10;
             }
-            System.out.println(posSeconds);
             if (posSeconds < 10) posSeconds = 0;
             if (videoSeconds - posSeconds < 10) posSeconds = videoSeconds;
             if ((startSeconds <= posSeconds) && (posSeconds <= endSeconds)) posSeconds = endSeconds;
