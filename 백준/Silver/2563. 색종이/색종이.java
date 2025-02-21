@@ -22,20 +22,14 @@ public class Main {
                 }
             }
         }
-        int answer = 0;
         int cnt = 0;
         for (int a = 0; a < grid.length; a++) {
             for (int b = 0; b < grid[a].length; b++) {
-                if (grid[a][b] == 1) {
-                    answer += grid[a][b];
-                } else if (grid[a][b] > 1) {
-//                    System.out.println(a + " " + b + "===> " + grid[a][b]);
-                    answer -= grid[a][b] - 1;
+                if (grid[a][b] > 1) {
                     cnt += grid[a][b] - 1;
                 }
             }
         }
-//        System.out.println(answer);
         System.out.println(100 * N - cnt);
     }
 }
