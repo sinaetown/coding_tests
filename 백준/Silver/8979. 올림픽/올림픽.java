@@ -15,13 +15,8 @@ public class Main {
             this.gold = gold;
             this.silver = silver;
             this.bronze = bronze;
+            this.sorted = 1;
         }
-
-        public Country(int number, int sorted) {
-            this.number = number;
-            this.sorted = sorted;
-        }
-
     }
 
     public static void main(String[] args) throws IOException {
@@ -47,40 +42,25 @@ public class Main {
                     return o2.silver - o1.silver;
                 } else return o2.gold - o1.gold;
             }
-
             ;
         });
 
-        int answer = 1;
-        List<Country> sorted = new ArrayList<>();
-        for (int i = 0; i < list.size(); i++) {
-            int cnt = 0;
-            if (i == list.size() - 1) {
-                sorted.add(new Country(list.get(i).number, answer));
-                break;
-            }
-            for (int j = i + 1; j < list.size(); j++) {
-                if (list.get(i).gold == list.get(j).gold
-                        && list.get(i).silver == list.get(j).silver
-                        && list.get(i).bronze == list.get(j).bronze) {
-                    cnt++;
-                    sorted.add(new Country(list.get(j).number, answer));
-                } else {
-                    sorted.add(new Country(list.get(i).number, answer));
-                    if (cnt == 0) answer++;
-                    else {
-                        answer += cnt + 1;
-                        i += cnt;
-                    }
-                    break;
-                }
+        for (int i = 1; i < N; i++) {
+            Country c1 = list.get(i - 1);
+            Country c2 = list.get(i);
+            if (c1.gold == c2.gold
+                    && c1.silver == c2.silver
+                    && c1.bronze == c2.bronze) {
+                c2.sorted = c1.sorted;
+            } else {
+                c2.sorted = i + 1;
             }
         }
-        for (Country c : sorted) {
+
+        for (Country c : list) {
             if (c.number == target) {
                 System.out.println(c.sorted);
             }
         }
-
     }
 }
