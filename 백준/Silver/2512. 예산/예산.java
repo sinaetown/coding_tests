@@ -2,41 +2,29 @@ import java.io.*;
 import java.util.*;
 
 public class Main {
-
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
         int N = Integer.parseInt(br.readLine());
-        List<Integer> list = new ArrayList<>();
-        int sum = 0;
+        int left = 0;
+        int right = -1;
+        int[] arr = new int[N];
         StringTokenizer st = new StringTokenizer(br.readLine());
         for (int i = 0; i < N; i++) {
-            int num = Integer.parseInt(st.nextToken());
-            list.add(num);
-            sum += num;
+            arr[i] = Integer.parseInt(st.nextToken());
+            right = Math.max(right, arr[i]); //최댓값 찾기
         }
-        list.sort(null);
         int total = Integer.parseInt(br.readLine());
-        if (sum <= total) {
-            System.out.println(list.get(list.size() - 1));
-            return;
-        }
-        int start = (int) (total / N);
-        while (start <= list.get(list.size() - 1)) {
-            int sub = 0;
+        while (left <= right) {
+            int mid = (left + right) / 2;
+            long budget = 0;
             for (int i = 0; i < N; i++) {
-                if (list.get(i) <= start) {
-                    sub += list.get(i);
-                } else {
-                    sub += start;
-                }
+                if (arr[i] > mid) budget += mid;
+                else budget += arr[i];
             }
-            if (sub > total) {
-                break;
-            }
-            start++;
+            if (budget <= total) {
+                left = mid + 1;
+            } else right = mid - 1;
         }
-        System.out.println(start - 1);
-
+        System.out.println(right);
     }
 }
