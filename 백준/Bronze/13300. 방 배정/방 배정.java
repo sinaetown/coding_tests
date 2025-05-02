@@ -19,12 +19,13 @@ public class Main {
         for (int i = 1; i < arr.length; i++) {
             for (int j = 0; j < 2; j++) {
                 if (arr[i][j] != 0) {
-                    if (arr[i][j] <= k) sum++;
+                    if (k == 1) sum += arr[i][j];
+                    else if (arr[i][j] % k == 0) sum += arr[i][j] / k;
                     else if (arr[i][j] % k != 0) sum += arr[i][j] / k + 1;
                 }
-
             }
         }
+//        System.out.println(Arrays.deepToString(arr));
         System.out.println(sum);
     }
 }
