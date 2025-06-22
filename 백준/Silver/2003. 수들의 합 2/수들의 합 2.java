@@ -1,50 +1,36 @@
 import java.io.*;
-import java.util.Arrays;
-import java.util.StringTokenizer;
+import java.util.*;
 
 public class Main {
+    public static int n;
+    public static int m;
+    public static int[] arr;
+
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
         StringTokenizer st = new StringTokenizer(br.readLine());
-        int N = Integer.parseInt(st.nextToken());
-        int M = Integer.parseInt(st.nextToken());
-        int[] arr = new int[N];
+        n = Integer.parseInt(st.nextToken());
+        m = Integer.parseInt(st.nextToken());
         st = new StringTokenizer(br.readLine());
-        for (int i = 0; i < N; i++) {
-            arr[i] = Integer.parseInt(st.nextToken());
-        }
-        int cnt = 0;
-        int low = 0;
+        arr = new int[n];
+        for (int i = 0; i < n; i++) arr[i] = Integer.parseInt(st.nextToken());
+
+        int start = 0;
+        int end = 0;
+        int ans = 0;
         int sum = 0;
-        int high = 0;
-        while (low < N) {
-            if (high < N) {
-                if (sum < M) {
-                    sum += arr[high];
-                    high++;
-                } else if (sum > M) {
-                    low++;
-                    high = low;
-                    sum = 0;
-                } else {
-                    cnt++;
-                    low++;
-                    high = low;
-                    sum = 0;
-                }
-            } else {
-                if (sum == M) {
-                    cnt++;
-                    low++;
-                    high = low;
-                    sum = 0;
-                } else {
-                    low++;
-                    high = low;
-                    sum = 0;
-                }
+        while (end < n) {
+            sum += arr[end];
+
+            while (sum > m) {
+                sum -= arr[start];
+                start++;
             }
+            if (sum == m) ans++;
+            end++;
         }
-        System.out.println(cnt);
+        System.out.println(ans);
+
     }
 }
