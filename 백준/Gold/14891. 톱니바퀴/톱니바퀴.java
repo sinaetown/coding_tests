@@ -2,138 +2,52 @@ import java.io.*;
 import java.util.*;
 
 public class Main {
-    static char[] a;
-    static char[] b;
-    static char[] c;
-    static char[] d;
+    static char[][] gears = new char[4][];
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st;
-        a = br.readLine().toCharArray();
-        b = br.readLine().toCharArray();
-        c = br.readLine().toCharArray();
-        d = br.readLine().toCharArray();
-        // index 2랑 6이 맞닿아있음
+        for (int i = 0; i < 4; i++) gears[i] = br.readLine().toCharArray();
 
         int n = Integer.parseInt(br.readLine());
         for (int i = 0; i < n; i++) {
             st = new StringTokenizer(br.readLine());
-            int device = Integer.parseInt(st.nextToken());
+            int device = Integer.parseInt(st.nextToken()) - 1;
             int direction = Integer.parseInt(st.nextToken());
-            if (direction == 1) operateclock(device);
-            else if (direction == -1) operatecounter(device);
-
+            rotate(device, direction);
         }
         int sum = 0;
-        sum += (a[0] == '0') ? 0 : 1;
-        sum += (b[0] == '0') ? 0 : 2;
-        sum += (c[0] == '0') ? 0 : 4;
-        sum += (d[0] == '0') ? 0 : 8;
+        for (int i = 0; i < 4; i++) {
+            if (gears[i][0] == '1') {
+                sum += (1 << i); // 1, 2, 4, 8
+            }
+        }
         System.out.println(sum);
     }
 
-    public static void operatecounter(int device) {
-        char[] compare_a = a.clone();
-        char[] compare_b = b.clone();
-        char[] compare_c = c.clone();
-        char[] compare_d = d.clone();
-        if (device == 1) {
-            a = counterclockwise(a);
-            if (compare_a[2] != compare_b[6]) {
-                b = clockwise(b);
-                if (compare_b[2] != compare_c[6]) {
-                    c = counterclockwise(c);
-                    if (compare_c[2] != compare_d[6]) {
-                        d = clockwise(d);
-                    }
-                }
-            }
-        } else if (device == 4) {
-            d = counterclockwise(d);
-            if (compare_c[2] != compare_d[6]) {
-                c = clockwise(c);
-                if (compare_b[2] != compare_c[6]) {
-                    b = counterclockwise(b);
-                    if (compare_a[2] != compare_b[6]) {
-                        a = clockwise(a);
-                    }
-                }
-            }
-        } else if (device == 2) {
-            b = counterclockwise(b);
-            if (compare_a[2] != compare_b[6]) {
-                a = clockwise(a);
-            }
-            if (compare_b[2] != compare_c[6]) {
-                c = clockwise(c);
-                if (compare_c[2] != compare_d[6]) {
-                    d = counterclockwise(d);
-                }
-            }
-        } else if (device == 3) {
-            c = counterclockwise(c);
-            if (compare_c[2] != compare_d[6]) {
-                d = clockwise(d);
-            }
-            if (compare_b[2] != compare_c[6]) {
-                b = clockwise(b);
-                if (compare_a[2] != compare_b[6]) {
-                    a = counterclockwise(a);
-                }
-            }
-        }
-    }
+    public static void rotate(int device, int direction) {
+        char[][] backup = new char[4][];
+        for (int i = 0; i < 4; i++) backup[i] = gears[i].clone();
+        int[] directions = new int[4];
+        directions[device] = direction;
 
-    public static void operateclock(int device) {
-        char[] compare_a = a.clone();
-        char[] compare_b = b.clone();
-        char[] compare_c = c.clone();
-        char[] compare_d = d.clone();
-        if (device == 1) {
-            a = clockwise(a);
-            if (compare_a[2] != compare_b[6]) {
-                b = counterclockwise(b);
-                if (compare_b[2] != compare_c[6]) {
-                    c = clockwise(c);
-                    if (compare_c[2] != compare_d[6]) {
-                        d = counterclockwise(d);
-                    }
-                }
-            }
-        } else if (device == 4) {
-            d = clockwise(d);
-            if (compare_c[2] != compare_d[6]) {
-                c = counterclockwise(c);
-                if (compare_b[2] != compare_c[6]) {
-                    b = clockwise(b);
-                    if (compare_a[2] != compare_b[6]) {
-                        a = counterclockwise(a);
-                    }
-                }
-            }
-        } else if (device == 2) {
-            b = clockwise(b);
-            if (compare_a[2] != compare_b[6]) {
-                a = counterclockwise(a);
-            }
-            if (compare_b[2] != compare_c[6]) {
-                c = counterclockwise(c);
-                if (compare_c[2] != compare_d[6]) {
-                    d = clockwise(d);
-                }
-            }
-        } else if (device == 3) {
-            c = clockwise(c);
-            if (compare_c[2] != compare_d[6]) {
-                d = counterclockwise(d);
-            }
-            if (compare_b[2] != compare_c[6]) {
-                b = counterclockwise(b);
-                if (compare_a[2] != compare_b[6]) {
-                    a = clockwise(a);
-                }
-            }
+        //왼쪽으로 전파
+        for (int i = device - 1; i >= 0; i--) {
+            if (backup[i][2] != backup[i + 1][6]) {
+                directions[i] = -directions[i + 1];
+            } else break;
+        }
+
+        //오른쪽으로 전파
+        for (int i = device + 1; i < 4; i++) {
+            if (backup[i - 1][2] != backup[i][6]) {
+                directions[i] = -directions[i - 1];
+            } else break;
+        }
+
+        for (int i = 0; i < 4; i++) {
+            if (directions[i] == 1) gears[i] = clockwise(gears[i]);
+            else if (directions[i] == -1) gears[i] = counterclockwise(gears[i]);
         }
     }
 
