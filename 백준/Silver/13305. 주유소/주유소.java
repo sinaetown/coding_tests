@@ -8,6 +8,7 @@ public class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+        long answer = 0;
         int n = Integer.parseInt(br.readLine());
         road = new int[n - 1];
         fuel = new int[n];
@@ -20,8 +21,7 @@ public class Main {
             fuel[i] = Integer.parseInt(st.nextToken());
         }
         dec();
-        int answer = 0;
-        for (int i = 0; i < road.length; i++) answer += road[i] * fuel[i];
+        for (int i = 0; i < road.length; i++) answer += (long) road[i] * fuel[i];
         System.out.println(answer);
     }
 
