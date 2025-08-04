@@ -10,18 +10,20 @@ public class Main {
         Stack<Character> stack = new Stack<>();
         StringBuilder answer = new StringBuilder();
         for (int i = 0; i < word.length(); i++) {
-            int cnt = 0;
             stack.push(word.charAt(i));
-            if (stack.size() >= bomb.length()) {
-                for (int j = 0; j < bomb.length(); j++) {
-                    if (stack.get(stack.size() - bomb.length() + j) == bomb.charAt(j)) {
-                        cnt++;
+            while (true) {
+                if (stack.size() >= bomb.length() && stack.peek() == bomb.charAt(bomb.length() - 1)) {
+                    String out = "";
+                    while (out.length() < bomb.length()) {
+                        out = stack.pop() + out;
                     }
-
-                }
-                if (cnt == bomb.length()) {
-                    for (int k = 0; k < bomb.length(); k++) stack.pop();
-                }
+                    if (!out.equals(bomb)) {
+                        for (int j = 0; j < out.length(); j++) {
+                            stack.push(out.charAt(j));
+                        }
+                        break;
+                    }
+                } else break;
             }
         }
         if (stack.isEmpty()) System.out.println("FRULA");
