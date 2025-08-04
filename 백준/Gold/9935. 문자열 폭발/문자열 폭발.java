@@ -13,11 +13,11 @@ public class Main {
             stack.push(word.charAt(i));
             while (true) {
                 if (stack.size() >= bomb.length() && stack.peek() == bomb.charAt(bomb.length() - 1)) {
-                    String out = "";
+                    StringBuilder out = new StringBuilder();
                     while (out.length() < bomb.length()) {
-                        out = stack.pop() + out;
+                        out.append(stack.pop());
                     }
-                    if (!out.equals(bomb)) {
+                    if (!out.reverse().toString().equals(bomb)) {
                         for (int j = 0; j < out.length(); j++) {
                             stack.push(out.charAt(j));
                         }
