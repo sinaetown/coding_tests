@@ -3,18 +3,7 @@ import java.util.*;
 
 
 public class Main {
-    public static class Edge {
-        int node;
-        int cost;
-
-        public Edge(int node, int cost) {
-            this.node = node;
-            this.cost = cost;
-        }
-    }
-
     public static int[][] dp;
-    public static List<List<Edge>> list = new ArrayList<>(); //방향 그래프
     public static int n;
     public static int max = -1;
 
@@ -31,7 +20,6 @@ public class Main {
                 else dp[i][j] = 10000000;
             }
         }
-        for (int i = 0; i < m; i++) list.add(new ArrayList<>());
         for (int i = 0; i < m; i++) {
             st = new StringTokenizer(br.readLine());
             int start = Integer.parseInt(st.nextToken());
