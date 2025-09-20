@@ -11,7 +11,7 @@ class Solution {
     }
     
     public String recur(String p){
-        if(p.isEmpty()) return p;
+        if(p.equals("")) return p;
         //분리하고 둘 다 균형잡혔는지 확인하는 로직
         String[] separated = seperate(p);
         String u = separated[0];
